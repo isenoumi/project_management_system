@@ -1,0 +1,36 @@
+.header {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: left;
+}
+
+.headInput,
+.headSelect {
+	// width: 300px;
+	display: flex;
+	align-items: center;
+	margin: 15px 30px 15px 0;
+
+	.title {
+		margin-right: 5px;
+		text-wrap: nowrap;
+		text-align: right;
+	}
+
+	.input {
+		width: 210px;
+	}
+}
+
+.btnList {
+	display: flex;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+
+.page {
+	display: flex;
+	justify-content: right;
+	margin: 20px;
+}

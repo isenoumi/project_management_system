@@ -1,0 +1,80 @@
+/* .app-main {
+  background: #fff !important;
+  padding: 15px 30px;
+} */
+
+.yeshu {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	// justify-content: space-between;
+
+	.header-left {
+		display: flex;
+		align-items: center;
+		// height: 45px !important;
+
+		.input {
+			// width: 400px;
+			display: flex;
+			align-items: center;
+			// margin-right: 20px;
+
+			.title {
+				margin-right: 5px;
+				font-weight: normal;
+			}
+
+			.el-input {
+				width: 210px !important;
+			}
+
+		}
+	}
+}
+
+.tabla {
+	margin-top: 20px;
+}
+
+.txt {
+	display: flex;
+	margin-top: 30px;
+
+	.editor-wrapper {
+		height: 500px !important;
+	}
+}
+
+.input {
+	// width: 400px;
+	display: flex;
+	align-items: center;
+	margin-right: 30px;
+
+	.title {
+		margin-right: 5px;
+		font-weight: normal;
+	}
+
+	.el-input {
+		width: 210px;
+	}
+
+	.el-input__wrapper {
+		// height: 38px ;
+	}
+}
+
+.btn {
+	display: flex;
+	justify-content: flex-end;
+	text-align: right;
+	margin-top: 20px;
+}

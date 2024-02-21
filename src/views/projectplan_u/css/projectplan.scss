@@ -1,0 +1,42 @@
+.header {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: left;
+}
+
+/* .btnList {
+    margin: 0 0 20px 1300px;
+  } */
+
+.headInput,
+.headSelect {
+	/* width: 300px; */
+	display: flex;
+	align-items: center;
+	margin: 10px 30px 10px 0;
+
+	.title {
+		margin-right: 3px;
+		// width: 110px;
+		text-align: right;
+	}
+
+	.input {
+		width: 210px;
+	}
+}
+
+.btn {
+	margin-left: 40px;
+}
+
+.page {
+	display: flex;
+	justify-content: right;
+	margin: 20px;
+}
+
+.subTable {
+	padding: 20px;
+}

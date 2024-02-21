@@ -1,0 +1,39 @@
+.searchBox {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-bottom: 20px;
+
+	.headerSelect {
+		display: flex;
+		justify-content: left;
+		align-items: center;
+		flex-wrap: wrap;
+
+		.inputBox {
+			display: flex;
+			justify-content: left;
+			align-items: center;
+			margin-right: 20px;
+
+			.title {
+				// width: 150px;
+				text-wrap: nowrap;
+				text-align: right;
+				margin-right: 8px;
+			}
+
+			.input {
+				width: 210px;
+			}
+		}
+	}
+
+	.btnList {
+		display: flex;
+		justify-content: right;
+		margin-left: 20px;
+		align-items: center;
+	}
+}

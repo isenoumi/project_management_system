@@ -1,0 +1,42 @@
+.header {
+	display: flex;
+	align-items: center;
+	// flex-wrap: wrap;
+	justify-content: left;
+}
+
+.headInput,
+.headSelect {
+	// width: 300px;
+	display: flex;
+	align-items: center;
+	margin: 20px 20px 20px 0;
+
+	.title {
+		// width: 110px;
+		text-wrap: nowrap;
+		text-align: right;
+		margin-right: 5px;
+	}
+
+	.input {
+		width: 210px;
+	}
+}
+
+.btnList {
+	// margin-left: 20px;
+	display: flex;
+	justify-content: right;
+	flex-wrap: nowrap;
+
+	.btn {
+		margin-right: 10px;
+	}
+}
+
+.page {
+	display: flex;
+	justify-content: right;
+	margin: 20px;
+}

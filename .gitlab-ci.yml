@@ -1,0 +1,57 @@
+image: node:16.14.2-alpine3.14
+
+stages:
+  - build
+  - publish
+  - deploy
+
+before_script:
+  - chmod +x ./deploy/deploy.sh
+
+.common_runner: &common_runner
+  tags:
+    - oms
+
+#----------build artifact-----------#
+build:
+  stage: build
+  only:
+    - main
+  script:
+    - sh ./deploy/deploy.sh build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - dist/
+  cache:
+    key: ${CI_PROJECT_NAME}
+    paths:
+      - node_modules/
+  <<: *common_runner
+
+#---------push image-----------#
+publish:
+  stage: publish
+  only:
+    - main
+  needs:
+    - build
+  when: on_success
+  image: registry.cn-chengdu.aliyuncs.com/sniqny/docker:24.0.4
+  services:
+    - docker:24.0.4-dind
+  script:
+    - sh ./deploy/deploy.sh publish
+  <<: *common_runner
+
+#---------deployment-----------#
+deploy:
+  stage: deploy
+  only:
+    - main
+  needs:
+    - publish
+  when: on_success
+  script:
+    - sh ./deploy/deploy.sh deploy
+  <<: *common_runner

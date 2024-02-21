@@ -1,0 +1,65 @@
+.login-container {
+    width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    background-color: #2d3a4b;
+  
+    .login-form {
+      width: 520px;
+      max-width: 100%;
+      padding: 160px 35px 0;
+      margin: 0 auto;
+      overflow: hidden;
+  
+      .captcha {
+        position: absolute;
+        top: 0;
+        right: 0;
+  
+        img {
+          width: 120px;
+          height: 48px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  
+  .el-form-item {
+    background: rgb(0 0 0 / 10%);
+    border: 1px solid rgb(255 255 255 / 10%);
+    border-radius: 5px;
+  }
+  
+  .el-input {
+    background: transparent;
+  
+    // 子组件 scoped 无效，使用 :deep
+    :deep(.el-input__wrapper) {
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
+  
+      .el-input__inner {
+        color: #fff;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        caret-color: #fff;
+  
+        &:-webkit-autofill {
+          box-shadow: 0 0 0 1000px transparent inset !important;
+          -webkit-text-fill-color: #fff !important;
+        }
+  
+        // 设置输入框自动填充的延迟属性
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+          transition: color 99999s ease-out, background-color 99999s ease-out;
+          transition-delay: 99999s;
+        }
+      }
+    }
+  }

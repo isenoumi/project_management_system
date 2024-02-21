@@ -1,0 +1,37 @@
+.infoBox {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+
+  .title {
+    font-size: 14px;
+    margin-bottom: 15px;
+    width: 300px;
+  }
+  .customerBox{
+    margin: 20px 0;
+    width:1600px;
+    display: flex;
+    justify-content: left;
+    .customerSubBox{
+      width: 540px;
+      display: flex;
+      justify-content: left;
+      flex-wrap: wrap;
+      .customer{
+        display: flex;
+        justify-content: left;
+       .customerTitle{
+        margin-right: 8px;
+        width: 160px;
+       }
+      }
+      }
+
+  }
+}
+.boxTitle {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 30px;
+}

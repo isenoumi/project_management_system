@@ -1,0 +1,50 @@
+.header {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	// justify-content: space-between;
+
+	.header-left {
+		display: flex;
+		align-items: center;
+
+		.inputs {
+			// width: 400px;
+			display: flex;
+			align-items: center;
+			margin-right: 30px;
+
+			.title {
+				margin-right: 5px;
+				font-weight: normal;
+			}
+
+			.el-input {
+				width: 210px;
+				// height: 40px;
+			}
+
+			.select-trigger {
+				width: 210px;
+			}
+
+			.el-input__wrapper {
+				width: 210px;
+				// height: 40px !important;
+			}
+		}
+	}
+
+	.header-right {
+		display: flex;
+		align-items: center;
+		margin-top: 20px;
+	}
+}
+
+.yeshu {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 20px;
+}

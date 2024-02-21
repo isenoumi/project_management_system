@@ -1,0 +1,89 @@
+.infoBox {
+	display: flex;
+	justify-content: left;
+	flex-wrap: wrap;
+
+	.title {
+		font-size: 14px;
+		margin-bottom: 15px;
+		width: 300px;
+	}
+
+	.customerBox {
+		margin: 20px 0;
+		width: 1700px;
+		display: flex;
+		justify-content: left;
+
+		.customerSubBox {
+			width: 540px;
+			display: flex;
+			justify-content: left;
+			flex-wrap: wrap;
+
+			.customer {
+				display: flex;
+				justify-content: left;
+
+				.customerTitle {
+					margin-right: 8px;
+					// width: 160px;
+				}
+			}
+		}
+
+	}
+}
+
+.boxTitle {
+	font-size: 16px;
+	font-weight: 700;
+	margin-top: 30px;
+}
+
+.customerSubBoxType2 {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	width: 100%;
+
+	.customerSubBox {
+		width: 40%;
+
+		.customer {
+			display: flex;
+			justify-content: left;
+			align-items: center;
+			margin: 10px 0;
+
+			.customerTitle {
+				width: 33%;
+			}
+		}
+
+	}
+}
+
+.customerSubBoxType1 {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	width: 100%;
+
+	.customerSubBox {
+		width: 100%;
+
+		.customer {
+			display: flex;
+			justify-content: left;
+			align-items: center;
+			margin: 4px 0;
+			width: 100%;
+
+			.customerTitle {
+				width: 33%;
+			}
+		}
+
+	}
+}

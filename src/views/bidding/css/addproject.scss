@@ -1,0 +1,69 @@
+.closeIcon {
+    color: #909399;
+    font-size: 16px;
+    position: absolute;
+    right: 60px;
+    cursor: pointer;
+  }
+  .tipsBox {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    .tips {
+      font-size: 14px;
+      color: red;
+    }
+  }
+  .infoBox {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+  
+    .title {
+      font-size: 14px;
+      margin-bottom: 15px;
+      width: 300px;
+    }
+  }
+  .boxTitle {
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 30px;
+  }
+  
+  .input {
+    width: 212px;
+  }
+  .addBtn {
+    margin-bottom: 20px;
+  }
+  .head {
+    display: flex;
+    align-items: center;
+  }
+  
+  .head-input {
+    width: 400px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .btn {
+    margin-left: 40px;
+  }
+  
+  .main {
+    margin-top: 30px;
+  }
+  .block {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 30px;
+  }
+  
+  .formItem {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+  }

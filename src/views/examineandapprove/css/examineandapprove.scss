@@ -1,0 +1,133 @@
+.demo-tabs>.el-tabs__content {
+	padding: 32px;
+	color: #6b778c;
+	font-size: 32px;
+	font-weight: 600;
+}
+
+::v-deep(.el-tabs) {
+	margin-top: 30px !important;
+}
+
+.btn {
+	width: 150px;
+	margin: 30px auto;
+}
+
+.down {
+	margin-top: 25px;
+	display: flex;
+	align-items: center;
+}
+
+.textarea {
+	display: flex;
+	margin-top: 35px;
+
+	.input-textarea {
+		width: 500px;
+	}
+}
+
+.add-carefuls {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: left;
+
+	::v-deep(.el-date-editor) {
+		height: 40px !important;
+	}
+
+	.inputs {
+		// width: 400px;
+		display: flex;
+		align-items: center;
+		margin-right: 30px !important;
+		// margin-top: 30px !important;
+
+		.name {
+			margin-right: 30px !important;
+		}
+
+		.title {
+			margin-right: 15px !important;
+			font-weight: normal;
+		}
+
+		.el-input {
+			width: 180px !important;
+			height: 38px !important;
+		}
+
+		.el-input__wrapper {
+			height: 38px !important;
+		}
+	}
+}
+
+.examine-card {
+	margin-top: 20px;
+}
+
+::v-deep(.el-form-item) {
+	height: 30px !important;
+}
+
+.cost-form {
+	display: flex;
+	flex: 1;
+}
+
+.demo-tabs>.el-tabs__content {
+	padding: 32px;
+	color: #6b778c;
+	font-size: 32px;
+	font-weight: 600;
+}
+
+::v-deep(.el-tabs__nav-wrap::after) {
+	height: 0px;
+}
+
+::v-deep(.el-radio-button__inner) {
+	margin-top: 20px;
+	height: 40px !important;
+	line-height: 20px !important;
+	font-size: 16px !important;
+
+}
+
+.select {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+
+	.item {
+		display: flex;
+		justify-content: left;
+
+		align-items: center;
+
+		.line {
+			width: 70px;
+			height: 10px;
+			margin: 0 10px;
+		}
+	}
+}
+
+.paymentable {
+	margin-top: 20px;
+}
+
+// .addtitle {
+// 	display: flex;
+// 	align-items: center;
+// 	justify-content: space-between;
+// }
+
+.list-form {
+	border-bottom: 1px dashed #6b778c;
+	padding-bottom: 50px;
+}

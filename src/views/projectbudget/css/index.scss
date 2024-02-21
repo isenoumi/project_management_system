@@ -1,0 +1,155 @@
+.title1 {
+	font-weight: 550;
+	font-size: 18px;
+}
+
+.title3 {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.title2 {
+	font-weight: 550;
+	margin: 8px 0;
+	font-size: 18px;
+}
+
+.btns {
+	width: 44px;
+	margin: 10px auto;
+}
+
+.yeshu {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	// justify-content: space-between;
+
+	.header-left {
+		display: flex;
+		align-items: center;
+
+		.inputs {
+			// width: 400px;
+			display: flex;
+			align-items: center;
+			margin-right: 30px;
+
+			.title {
+				margin-right: 5px;
+				font-weight: normal;
+			}
+
+			.el-input {
+				width: 210px;
+				// height: 40px;
+			}
+
+			.select-trigger {
+				width: 210px;
+			}
+
+			.el-input__wrapper {
+				width: 210px;
+				// height: 40px !important;
+			}
+		}
+	}
+
+	.header-right {
+		display: flex;
+		align-items: center;
+		margin-top: 20px;
+	}
+}
+
+.inputs {
+	// width: 400px;
+	display: flex;
+	align-items: center;
+	margin-right: 30px;
+
+	.title {
+		margin-right: 5px;
+		font-weight: normal;
+	}
+
+	.el-button {
+		margin-left: 30px;
+	}
+
+	.el-input {
+		width: 210px;
+		// height: 40px;
+	}
+
+	.select-trigger {
+		width: 210px;
+	}
+
+	.el-input__wrapper {
+		width: 210px;
+		// height: 40px !important;
+	}
+}
+
+.tabla {
+	margin-top: 20px;
+}
+
+.msk {
+	.el-table--enable-row-hover .el-table__body tr:hover>td {
+		background-color: transparent !important;
+	}
+
+	.el-input {
+		width: 100px;
+	}
+
+	.el-input__wrapper {
+		border: none !important;
+
+		box-shadow: none !important;
+
+		// padding: 0px; //前边边距去掉
+	}
+
+	.el-input__inner {
+		text-align: center !important;
+	}
+
+	.title1 {
+		font-weight: 500;
+		font-size: 16px;
+		margin-bottom: 15px;
+	}
+
+	.el-dialog__body {
+		padding: 0px 30px 30px 30px !important;
+	}
+
+	.el-dialog__header {
+		padding: 30px 30px 10px 30px !important;
+	}
+}
+
+.centerDialogVisibles-btn {
+	display: flex;
+	align-items: center;
+}
+
+::v-deep(.el-tabs__nav-wrap::after) {
+	height: 0px;
+}
+
+.tabs {
+	margin: 15px 0;
+}
