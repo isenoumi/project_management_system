@@ -212,7 +212,7 @@ const getNum = (value: string) => {
     response.data.map((v: any) => {
       if (v.overExpenditure == "0") {
         v.overExpenditure = "未超过";
-      } else {
+      } else if (v.overExpenditure == "1") {
         v.overExpenditure = "超过";
       }
     });
@@ -247,9 +247,10 @@ const getdetails = (value: string) => {
 const setoperate = (value: any) => {
   aggregateData.operateList = [];
   aggregateData.id = value.id;
+  console.log("222", value);
   if (value.overExpenditure == "0") {
     value.overExpenditure = "未超过";
-  } else {
+  } else if (value.overExpenditure == "1") {
     value.overExpenditure = "超过";
   }
   aggregateData.operateList.push(value);
@@ -352,15 +353,19 @@ const tablaList = () => {
     .then(({ data }) => {
       let datalist = data.records;
       datalist.map((v: any) => {
-        if (v.projectStatus === "INPROGRESS") {
-          v.projectStatus = "进行中";
-        } else if (v.projectStatus === "NOTSTARTED") {
-          v.projectStatus = "未开始";
-        } else if (v.projectStatus === "FINISHED") {
-          v.projectStatus = "已完结";
-        } else if (v.projectStatus === "NOFINISHED") {
-          v.projectStatus = "已完结(未中标)";
-        }
+        // if (v.projectStatus === "INPROGRESS") {
+        //   v.projectStatus = "进行中";
+        // } else if (v.projectStatus === "NOTSTARTED") {
+        //   v.projectStatus = "未开始";
+        // } else if (v.projectStatus === "FINISHED") {
+        //   v.projectStatus = "已完结";
+        // } else if (v.projectStatus === "NOFINISHED") {
+        //   v.projectStatus = "已完结(未中标)";
+        // }
+        let temp = JSON.parse(
+          localStorage.getItem("projectStatusOptions")
+        ).filter((item) => v.projectStatus === item.value);
+        v.projectStatus = temp[0]?.label;
         if (v.budgetStatus === 2) {
           v.budgetStatus = "已导入";
         } else {
@@ -459,3 +464,4 @@ onMounted(() => {
 <style lang="scss" scoped>
 @import "./css/index.scss";
 </style>
+import { reduce } from "lodash";

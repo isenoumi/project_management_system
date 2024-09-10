@@ -114,7 +114,8 @@
             v-if="
               scope.row.projectStatus == 'NOTSTARTED' ||
               scope.row.projectStatus == 'BEGINPROJECT' ||
-              scope.row.projectStatus == 'INPROGRESS'
+              scope.row.projectStatus == 'INPROGRESS' ||
+              scope.row.projectStatus == 'APPLYING'
             "
             v-hasPerm="['PROJECT_EDIT']"
             text
@@ -126,7 +127,8 @@
             v-if="
               scope.row.projectStatus == 'NOTSTARTED' ||
               scope.row.projectStatus == 'BEGINPROJECT' ||
-              scope.row.projectStatus == 'INPROGRESS'
+              scope.row.projectStatus == 'INPROGRESS' ||
+              scope.row.projectStatus == 'APPLYING'
             "
             v-hasPerm="['CLIENT_VISIT_DETAIL_INTO']"
             text
@@ -137,7 +139,8 @@
           <el-button
             v-if="
               scope.row.projectStatus == 'NOTSTARTED' ||
-              scope.row.projectStatus == 'BEGINPROJECT'
+              scope.row.projectStatus == 'BEGINPROJECT' ||
+              scope.row.projectStatus == 'APPLYING'
             "
             v-hasPerm="['CLIENT_VISIT_DETAIL_SUPPORT']"
             text
@@ -228,6 +231,14 @@
         @reset="reset"
       ></detailProject>
     </div>
+
+    <div v-if="biddingVisible">
+      <biddingComponents
+        :id="id"
+        v-model="biddingVisible"
+        @reset="reset"
+      ></biddingComponents>
+    </div>
   </div>
 </template>
 <!-- 图标选择器示例 -->
@@ -242,6 +253,7 @@ import addVisit from "./addVisit.vue";
 import detailProject from "./detailProject.vue";
 import { projectEstablishment, bidding } from "@/api/visit/index";
 import { getprojectTableDataApi } from "@/api/visit/index";
+import biddingComponents from "@/views/projectinfo/components/bidding.vue";
 const router = useRouter();
 const emits = defineEmits(["refresh", "time"]);
 const props = defineProps({
@@ -249,6 +261,8 @@ const props = defineProps({
   showBtn: { type: Boolean, default: true },
   id: { type: String, default: "" },
 });
+const biddingVisible = ref(false);
+const id = ref("");
 // 项目信息form
 const projectFormData = ref({});
 // 新增项目信息弹框
@@ -329,28 +343,34 @@ const handleEditProject = (e) => {
   };
   addProjectVisible.value = true;
 };
+// // 确认招投标
+// const handleBiddingMsg = (e) => {
+//   ElMessageBox.confirm(
+//     '请确认是否招投标。招投标后将流转至下一流程，并在"招投标管理"中展示该项目?',
+//     "提示",
+//     {
+//       confirmButtonText: "确认招投标",
+//       cancelButtonText: "取消",
+//       type: "warning",
+//     }
+//   )
+//     .then(() => {
+//       bidding({ id: e.id }).then(({ code, msg }) => {
+//         if (code == 200)
+//           ElMessage({
+//             type: "success",
+//             message: msg,
+//           });
+//         reset();
+//       });
+//     })
+//     .catch(() => {});
+// };
+
 // 确认招投标
 const handleBiddingMsg = (e) => {
-  ElMessageBox.confirm(
-    '请确认是否招投标。招投标后将流转至下一流程，并在"招投标管理"中展示该项目?',
-    "提示",
-    {
-      confirmButtonText: "确认招投标",
-      cancelButtonText: "取消",
-      type: "warning",
-    }
-  )
-    .then(() => {
-      bidding({ id: e.id }).then(({ code, msg }) => {
-        if (code == 200)
-          ElMessage({
-            type: "success",
-            message: msg,
-          });
-        reset();
-      });
-    })
-    .catch(() => {});
+  biddingVisible.value = true;
+  id.value = e.id;
 };
 // 确认立项
 const handleProjectMsg = (e) => {
@@ -387,6 +407,7 @@ const reset = () => {
   addProjectVisible.value = false;
   projectInfoVisible.value = false;
   detailProjectVisible.value = false;
+  biddingVisible.value = false;
   Object.assign(query.value, {
     area: "",
     projectFirstLevel: "",

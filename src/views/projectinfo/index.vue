@@ -377,6 +377,21 @@
                 @click="handleBiddingMsg(scope.row)"
                 >招投标
               </el-button>
+              <el-button
+                v-if="scope.row.projectStatus"
+                text
+                type="primary"
+                @click="handleMobilization(scope.row)"
+              >
+                进场
+              </el-button>
+              <el-button
+                v-if="scope.row.projectStatus"
+                text
+                type="primary"
+                @click="handleContract(scope.row)"
+                >合同签订
+              </el-button>
 
               <el-button
                 v-if="
@@ -447,6 +462,21 @@
         @reset="reset"
       ></detailProject>
     </div>
+    <div v-if="biddingVisible">
+      <biddingComponents
+        :id="id"
+        v-model="biddingVisible"
+        @reset="reset"
+      ></biddingComponents>
+    </div>
+    <div v-if="mobilizationVisible">
+      <Mobilization
+        :id="id"
+        v-model="mobilizationVisible"
+        :projectName="ApprovalFormData"
+        @reset="reset"
+      ></Mobilization>
+    </div>
   </div>
 </template>
 <!-- 图标选择器示例 -->
@@ -456,6 +486,8 @@ import { useRouter } from "vue-router";
 import addProject from "@/views/customerVisit/components/addproject.vue";
 import addVisit from "@/views/customerVisit/components/addVisit.vue";
 import detailProject from "@/views/customerVisit/components/detailProject.vue";
+import biddingComponents from "./components/bidding.vue";
+import Mobilization from "./components/mobilization.vue";
 import fileUpload from "@/components/Upload/fileUpload.vue";
 import { ElMessage, ElMessageBox } from "element-plus";
 import cityData from "@/assets/json/pcas-code.json";
@@ -464,7 +496,7 @@ import {
   projectDel,
   getMyProjectInfoPage,
 } from "@/api/info/index";
-import { projectEstablishment, bidding } from "@/api/visit/index";
+import { projectEstablishment, bidding, contractSign } from "@/api/visit/index";
 const router = useRouter();
 
 // 销售人员姓名
@@ -481,6 +513,8 @@ const projectFormData = ref({});
 const addProjectVisible = ref(false);
 // 编辑项目信息弹框
 const projectInfoVisible = ref(false);
+const mobilizationVisible = ref(false);
+const ApprovalFormData = ref("");
 // 当前tab
 const activeTab = ref("first");
 // 地区选择对象
@@ -498,6 +532,7 @@ const projectInfo = ref({});
 const visitId = ref("");
 // 查看项目详情弹框
 const detailProjectVisible = ref(false);
+const biddingVisible = ref(false);
 // 项目详情
 const detailProjectInfo = ref({});
 // 客户id
@@ -532,6 +567,11 @@ const options = ref({
   areaOptions: [{ value: "", label: "" }],
   priorityOptions: [{ value: "", label: "" }],
   salespersonOptions: [{ value: "", label: "" }],
+  mobilizationStatusEnums: [
+    { value: "NOT_ENTERED", label: "未提前进场" },
+    { value: "REFUSE_TO_ENTER", label: "拒绝提前进场" },
+    { value: "ENTERED", label: "已提前进场" },
+  ],
 });
 // 项目信息主表
 const tableData = ref([]);
@@ -566,26 +606,15 @@ const handleEditProject = (e) => {
 };
 // 确认招投标
 const handleBiddingMsg = (e) => {
-  ElMessageBox.confirm(
-    '请确认是否招投标。招投标后将流转至下一流程，并在"招投标管理"中展示该项目?',
-    "提示",
-    {
-      confirmButtonText: "确认招投标",
-      cancelButtonText: "取消",
-      type: "warning",
-    }
-  )
-    .then(() => {
-      bidding({ id: e.id }).then(({ code, msg }) => {
-        if (code == 200)
-          ElMessage({
-            type: "success",
-            message: msg,
-          });
-        queryList();
-      });
-    })
-    .catch(() => {});
+  biddingVisible.value = true;
+  id.value = e.id;
+};
+// 确认招投标
+const handleMobilization = (e) => {
+  mobilizationVisible.value = true;
+  id.value = e.id;
+
+  ApprovalFormData.value = e.projectName;
 };
 // 确认立项
 const handleProjectMsg = (e) => {
@@ -600,6 +629,29 @@ const handleProjectMsg = (e) => {
   )
     .then(() => {
       projectEstablishment({ id: e.id }).then(({ code, msg }) => {
+        if (code == 200)
+          ElMessage({
+            type: "success",
+            message: msg,
+          });
+        queryList();
+      });
+    })
+    .catch(() => {});
+};
+// 合同签订
+const handleContract = (e) => {
+  ElMessageBox.confirm(
+    "请确认是否合同签订。确定后将流转至下一流程，并在”项目合同”中展示该项目信息。",
+    "提示",
+    {
+      confirmButtonText: "确认合同签订",
+      cancelButtonText: "取消",
+      type: "warning",
+    }
+  )
+    .then(() => {
+      contractSign({ projectId: e.id }).then(({ code, msg }) => {
         if (code == 200)
           ElMessage({
             type: "success",
@@ -657,6 +709,9 @@ const handleAddProject = () => {
 const reset = () => {
   addProjectVisible.value = false;
   projectInfoVisible.value = false;
+  biddingVisible.value = false;
+  mobilizationVisible.value = false;
+  id.value = "";
   Object.assign(query.value, {
     area: "",
     projectFirstLevel: "",

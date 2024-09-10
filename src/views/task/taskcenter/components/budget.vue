@@ -117,7 +117,7 @@ const getBudgetFatherTableList = (value: string) => {
       console.log(v.overExpenditure, "超支");
       if (v.overExpenditure == "0") {
         v.overExpenditure = "未超过";
-      } else {
+      } else if (v.overExpenditure == "1") {
         v.overExpenditure = "超过";
       }
     });
@@ -136,7 +136,7 @@ const setoperate = (value: any) => {
   budgetSubTableData.operateList = [];
   if (value.overExpenditure == "0") {
     value.overExpenditure = "未超过";
-  } else {
+  } else if (value.overExpenditure == "1") {
     value.overExpenditure = "超过";
   }
   budgetSubTableData.operateList.push(value);

@@ -447,7 +447,8 @@ const queryList = () => {
 const download = () => {
   const formData = new FormData();
   const fileUrl =
-    "http://cdn.cestech.com.cn/file/5645dde22c0643faaa090b5eabfc1476.xlsx";
+    // "http://cdn.cestech.com.cn/file/5645dde22c0643faaa090b5eabfc1476.xlsx";
+    "https://oms.cestech.com.cn/file/5a269b9ae7934f6faa9b877eeeb7f68e.xlsx";
 
   formData.append("fileUrl", fileUrl);
   downloadFile(formData).then((res) => {
@@ -469,9 +470,13 @@ const fileUrl = ref("");
 // 得到附件链接url
 const getFileUrl = (value: string) => {
   console.log(value, "adas");
+  // ElMessage({
+  //   type: "success",
+  //   message: "导入成功",
+  // });
   ElMessage({
-    type: "success",
-    message: "导入成功",
+    type: value.code == 500 ? "error" : "success",
+    message: value.msg,
   });
   reset();
   refresh();

@@ -28,6 +28,19 @@
         <!-- 预计成交时间：{{ projectInfo.expectedTransactionTime }} -->
         预计成交时间：{{ projectInfo.estimatedClosingTime }}
       </div>
+      <el-divider />
+      <div class="title">中标主体: {{ projectInfo.biddingMainName }}</div>
+      <div class="title">标书份数: {{ projectInfo.biddingDocumentsNum }}</div>
+      <div class="title">招标预算：{{ projectInfo.tenderBudgetNum }}</div>
+      <div class="title">
+        是否挂网：{{ projectInfo.spreadNetStatus == "YES" ? "是" : "否" }}
+      </div>
+      <div v-if="projectInfo.spreadNetStatus == 'YES'" class="title">
+        开标时间：{{ projectInfo.biddingOpenTime }}
+      </div>
+      <div v-else class="title">
+        预计挂网时间：{{ projectInfo.spreadNetTime }}
+      </div>
     </div>
 
     <div class="boxTitle">招投标信息</div>
@@ -38,102 +51,23 @@
         :rules="rules"
         label-width="140px"
       >
-        <el-form-item label="招标状态: " v-if="isEdit" prop="biddingStatus">
-          <el-radio-group v-model="biddingFrom.biddingStatus" class="ml-4">
-            <el-radio label="WINNINGBIDDER">中标</el-radio>
-            <el-radio label="NOTWINNINGTHEBID">未中标</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <div v-if="biddingFrom.biddingStatus == 'WINNINGBIDDER'">
-          <el-form-item label="项目名称: " prop="projectName">
+        <div>
+          <el-form-item label="挂网编号: " prop="spreadNetCode">
             <el-input
-              v-model="biddingFrom.projectName"
+              v-model="biddingFrom.spreadNetCode"
               class="input"
               autocomplete="off"
             ></el-input>
           </el-form-item>
-          <!-- <el-form-item label="项目类型: " prop="projectType">
-            <el-select
-              v-model="biddingFrom.projectType"
-              :multiple="true"
-              placeholder="请选择内容"
-              clearable
-            >
-              <el-option
-                v-for="item in options.typeOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
-          </el-form-item> -->
-          <el-form-item label="项目资金来源: " prop="projectSourceFunds">
-            <el-select
-              v-model="biddingFrom.projectSourceFunds"
-              placeholder="请选择内容"
-            >
-              <el-option
-                v-for="item in options.projectSourceFundsOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="所属区域: " prop="area">
-            <el-cascader
-              v-model="biddingFrom.area"
-              ref="cascaderAddr"
-              :options="cityData"
-              :props="cityProps"
-              placeholder="请选择省市区"
-              @change="handleAddrChange"
-            ></el-cascader>
-          </el-form-item>
-          <el-form-item label="客户名称: " prop="customerName">
-            <el-input
-              v-model="biddingFrom.customerName"
+          <el-form-item label="中标金额（万）: " prop="biddingHaveAmount">
+            <el-input-number
+              v-model="biddingFrom.biddingHaveAmount"
               class="input"
               autocomplete="off"
-            ></el-input>
+              :min="0"
+            ></el-input-number>
           </el-form-item>
-          <!-- <el-form-item label="客户联系人: " prop="customerContacts">
-            <el-input
-              v-model="biddingFrom.customerContacts"
-              class="input"
-              autocomplete="off"
-            ></el-input>
-          </el-form-item> -->
-          <el-form-item label="合同金额（万）: " prop="contractAmount">
-            <el-input
-              v-model="biddingFrom.contractAmount"
-              class="input"
-              autocomplete="off"
-            ></el-input>
-          </el-form-item>
-          <el-form-item
-            label="合同签订时间: "
-            prop="contractTime"
-            style="width: 400px"
-          >
-            <el-date-picker
-              v-model="biddingFrom.contractTime"
-              type="datetime"
-              placeholder="请选择日期"
-              value-format="YYYY-MM-DD hh:mm:ss"
-            />
-          </el-form-item>
-          <el-form-item label="工期: " prop="duration" style="width: 520px">
-            <el-date-picker
-              v-model="biddingFrom.duration"
-              type="datetimerange"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-              value-format="YYYY-MM-DD hh:mm:ss"
-            />
-          </el-form-item>
-          <el-form-item label="项目执行经理: " prop="executiveProjectLeader">
+          <!-- <el-form-item label="中标主体: " prop="executiveProjectLeader">
             <el-select
               v-model="biddingFrom.executiveProjectLeader"
               placeholder="请选择内容"
@@ -147,34 +81,20 @@
               />
             </el-select>
           </el-form-item>
-          <el-form-item label="项目成员: " prop="projectMember">
-            <el-select
-              v-model="biddingFrom.projectMember"
-              placeholder="请选择内容"
-              :multiple="true"
-              clearable
-              filterable
-            >
-              <el-option
-                v-for="item in options.executiveProjectLeaderOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
-          </el-form-item>
+          <el-form-item
+            label="开标时间: "
+            prop="contractTime"
+            style="width: 400px"
+          >
+            <el-date-picker
+              v-model="biddingFrom.contractTime"
+              type="datetime"
+              placeholder="请选择日期"
+              value-format="YYYY-MM-DD hh:mm:ss"
+            />
+          </el-form-item> -->
         </div>
-        <div v-else>
-          <el-form-item label="未中标原因分析: " prop="reason">
-            <el-input
-              v-model="biddingFrom.reason"
-              :rows="10"
-              type="textarea"
-              placeholder="请输入内容"
-            ></el-input>
-          </el-form-item>
-        </div>
-        <el-form-item label="招投标相关附件: " prop="biddingStatus">
+        <el-form-item label="招投标相关附件: " prop="">
           <div class="tipsBox">
             <fileUpload
               @get-file-url="getFileUrl"
@@ -241,7 +161,7 @@ const biddingFrom = ref({
   area: "",
   customerName: "",
   customerContacts: "",
-  contractAmount: "",
+  contractAmount: 0,
   personnel: "",
   biddingStatus: "WINNINGBIDDER",
   reason: "",
@@ -250,23 +170,16 @@ const biddingFrom = ref({
   executiveProjectLeader: "",
   annex: "",
   projectMember: [],
+  spreadNetCode: "",
+  biddingHaveAmount: 0,
 });
 
 // form 验证规则
 const rules = ref({
-  projectName: [{ required: true, message: "请输入项目名称" }],
-  projectType: [{ required: true, message: "请选择项目类型" }],
-  projectSourceFunds: [{ required: true, message: "请选择项目资金来源" }],
-  area: [{ required: true, message: "请选择所属区域" }],
-  customerName: [{ required: true, message: "请输入客户名称" }],
-  // customerContacts: [{ required: true, message: "请输入客户联系人" }],
-  contractAmount: [{ required: true, message: "请输入合同金额" }],
+  projectName: [{ required: true, message: "请输入挂网编号" }],
+  contractAmount: [{ required: true, message: "请输入中标金额" }],
   personnel: [{ required: true, message: "请选择销售人员" }],
-  // contractTime: [{ required: true, message: "请选择合同签订时间" }],
-  // duration: [{ required: true, message: "请选择工期" }],
-  // executiveProjectLeader: [{ required: true, message: "请选择项目执行经理" }],
-  reason: [{ required: true, message: "请输入未中标原因" }],
-  // projectMember: [{ required: true, message: "请选择项目成员" }],
+  contractTime: [{ required: true, message: "请选择开标时间" }],
 });
 // 地区选择
 const handleAddrChange = (e) => {
@@ -280,14 +193,9 @@ const addBidding = async () => {
   }
   try {
     await formDataAdd.value.validate();
-    let duration = "";
-    if (biddingFrom.value.duration)
-      duration =
-        biddingFrom.value.duration[0] + " - " + biddingFrom.value.duration[1];
     const data = {
       projectType: biddingFrom.value.projectType,
       id: props.id,
-      duration,
       executiveProjectLeader: biddingFrom.value.executiveProjectLeader,
       projectSourceFunds: biddingFrom.value.projectSourceFunds,
       customerName: biddingFrom.value.customerName,
@@ -300,32 +208,17 @@ const addBidding = async () => {
       projectName: biddingFrom.value.projectName,
       annex: biddingFrom.value.annex,
       projectMember: biddingFrom.value.projectMember,
+      biddingHaveAmount: biddingFrom.value.biddingHaveAmount,
+      spreadNetCode: biddingFrom.value.spreadNetCode,
     };
     if (props.isEdit) {
-      // 中标
-      if (biddingFrom.value.biddingStatus == "WINNINGBIDDER") {
-        biddingPost(data).then(({ msg }) => {
-          ElMessage({
-            message: msg,
-            type: "success",
-          });
-          emits("reset");
+      biddingPost(data).then(({ msg }) => {
+        ElMessage({
+          message: msg,
+          type: "success",
         });
-      } else {
-        // 未中标
-        biddingPost({
-          id: props.id,
-          biddingStatus: biddingFrom.value.biddingStatus,
-          result: biddingFrom.value.reason,
-          annex: biddingFrom.value.annex,
-        }).then(({ msg }) => {
-          ElMessage({
-            message: msg,
-            type: "success",
-          });
-          emits("reset");
-        });
-      }
+        emits("reset");
+      });
     } else {
       biddingEdit(data).then(({ msg }) => {
         ElMessage({
@@ -361,6 +254,7 @@ watch(
         biddingFrom.value.duration = biddingFrom.value.duration.split(" - ");
       }
       fileUrl.value = biddingFrom.value.annex;
+      console.log("biddingFrom.value,", biddingFrom.value);
     } else {
       Object.assign(
         biddingFrom.value,

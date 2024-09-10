@@ -17,9 +17,10 @@
             <el-tab-pane label="费用报销" name="费用报销">
               <expensereimbursement></expensereimbursement>
             </el-tab-pane>
-            <el-tab-pane label="备用金" name="备用金">
+            <!-- TODO 备用金 -->
+            <!-- <el-tab-pane label="备用金" name="备用金">
               <Imprest></Imprest>
-            </el-tab-pane>
+            </el-tab-pane> -->
           </el-tabs>
         </el-tab-pane>
         <!-- 审批记录 -->

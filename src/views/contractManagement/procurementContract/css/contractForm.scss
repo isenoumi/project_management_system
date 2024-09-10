@@ -1,0 +1,86 @@
+.input {
+  width: 212px;
+}
+
+.addBtn {
+  margin-bottom: 20px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+}
+
+.head-input {
+  width: 400px;
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  margin-left: 40px;
+}
+
+.main {
+  margin-top: 30px;
+}
+
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.formItemBox {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+}
+
+/* .formItem >>> .el-form-item__content {
+              width: 250px;
+            } */
+
+.customer {
+  display: flex;
+  justify-content: left;
+  // align-items: center;
+
+  .btnList {
+    margin-left: 20px;
+  }
+}
+
+.formBox {
+  .title {
+    margin-bottom: 20px;
+    font-weight: 550;
+    font-size: 14px;
+  }
+}
+.formItem{
+  margin-right: 30px;
+  margin-bottom: 10px;
+}
+.headinfo{
+  .title{
+    margin-bottom: 10px;
+    font-weight: 550;
+    font-size: 14px;
+  }
+  .item{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    div{
+      width: 350px;
+    }
+  }
+}
+:deep .el-tabs__nav-wrap::after {
+  height: 0px;
+}
+.el-tabs__item{
+  height: 50px;
+}

@@ -89,8 +89,13 @@ export const constantRoutes: RouteRecordRaw[] = [
     component: Layout,
     children: [
       {
-        path: "contractManagement",
-        component: () => import("@/views/contractManagement/index.vue"),
+        path: "projectContract",
+        component: () => import("@/views/contractManagement/projectContract/index.vue"),
+        meta: { hidden: true },
+      },
+      {
+        path: "procurementContract",
+        component: () => import("@/views/contractManagement/procurementContract/index.vue"),
         meta: { hidden: true },
       },
     ],

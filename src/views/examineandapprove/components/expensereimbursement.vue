@@ -673,11 +673,94 @@ const paymentcontractSubmin = () => {
           //     value: [v.fileCode],
           // },
         ];
-        formData.append("params", JSON.stringify(contractPaymentList));
-        // 测试环境
-        // formData.append("approvalCode", "CBFD1CE5-1714-4028-A6ED-34402117B74D");
+        const contractPaymentListTest = [
+          //  一级科目
+          {
+            id: "widget16966625021120001",
+            type: "input",
+            value: v.oneLevel + "",
+          },
+          //二级科目
+          {
+            id: "widget16966625026480001",
+            type: "input",
+            value: v.secondary + "",
+          },
+          //三级科目
+          {
+            id: "widget16966625029140001",
+            type: "input",
+            value: v.threeLevel + "",
+          },
+          //科目编号
+          {
+            id: "widget16966616481200001",
+            type: "input",
+            value: v.datalist[0].code + "",
+          },
+          //是否超标
+          {
+            id: "widget16967474861330001",
+            type: "input",
+            value: v.datalist[0].overExpenditure + "",
+          },
+          //预算费用合计
+          {
+            id: "widget16966635801270001",
+            type: "amount",
+            currency: "CNY",
+            value: Number(v.datalist[0].costAmount),
+          },
+          //付款费用合计
+          {
+            id: "widget16966627222780001",
+            type: "amount",
+            currency: "CNY",
+            value: Number(v.datalist[0].payAmount),
+          },
+          //付款金额
+          {
+            id: "widget16966629516540001",
+            type: "amount",
+            currency: "CNY",
+            value: Number(v.payAmount),
+          },
+          //所属月份
+          {
+            id: "widget16967457818330001",
+            type: "input",
+            value: v.getMonth + "",
+          },
+          //付款日期
+          {
+            id: "widget16967458051480001",
+            type: "input",
+            value: v.paymentDate + "",
+          },
+
+          //费用内容
+          {
+            id: "widget16510509704570001",
+            type: "textarea",
+            value: v.paymentRemarks + "",
+          },
+          //附件
+          {
+            id: "widget16966629163720001",
+            type: "attachmentV2",
+            value: [v.fileCode],
+          },
+        ];
+
+        // TODO 费用报销
         // 正式环境
-        formData.append("approvalCode", "8FDE492B-9904-4215-A087-EFA25B36282A");
+        // formData.append("params", JSON.stringify(contractPaymentList));
+        // formData.append("approvalCode", "8FDE492B-9904-4215-A087-EFA25B36282A");
+
+        // 测试环境
+        formData.append("approvalCode", "CBFD1CE5-1714-4028-A6ED-34402117B74D");
+        formData.append("params", JSON.stringify(contractPaymentListTest));
+
         formData.append("feishuUserId", user.feishuUserId);
         // 提交审批创建飞书实例
         getfeishuCreatesAnApproval(formData).then((res: any) => {
@@ -923,7 +1006,7 @@ const threeChange = (e: any, index: any) => {
     if (res.code === 200) {
       if (res.data.overExpenditure === 0) {
         res.data.overExpenditure = "未超过";
-      } else {
+      } else if (res.data.overExpenditure === 1) {
         res.data.overExpenditure = "超过";
       }
       let list = [];

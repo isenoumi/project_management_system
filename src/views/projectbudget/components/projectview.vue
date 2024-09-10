@@ -214,7 +214,7 @@ Bus.on("twoeditId", (row: any) => {
       response.data.map((v: any) => {
         if (v.overExpenditure == "0") {
           v.overExpenditure = "未超过";
-        } else {
+        } else if (v.overExpenditure == "1") {
           v.overExpenditure = "超过";
         }
       });
@@ -233,7 +233,7 @@ Bus.on("detailemits", (row: any) => {
       response.data.map((v: any) => {
         if (v.overExpenditure == "0") {
           v.overExpenditure = "未超过";
-        } else {
+        } else if (v.overExpenditure == "1") {
           v.overExpenditure = "超过";
         }
       });
@@ -258,7 +258,7 @@ Bus.on("edsId", (row: any) => {
       response.data.map((v: any) => {
         if (v.overExpenditure == "0") {
           v.overExpenditure = "未超过";
-        } else {
+        } else if (v.overExpenditure == "1") {
           v.overExpenditure = "超过";
         }
       });

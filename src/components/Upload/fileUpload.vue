@@ -108,6 +108,7 @@ const beforeRemove: UploadProps["beforeRemove"] = (uploadFile, uploadFiles) => {
 };
 
 onMounted(() => {
+  console.log("触发", props.annex);
   if (props.annex) {
     fileList.value = [];
     props.annex.split(",").forEach((item, index) => {

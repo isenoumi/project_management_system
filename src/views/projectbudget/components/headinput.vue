@@ -116,9 +116,8 @@ const getsattus = () => {
 const download = () => {
   const formData = new FormData();
   const fileUrl =
-    "http://cdn.cestech.com.cn/file/3648e276b25b412a824540e3682fb9b1.xlsx";
-  // "http://cdn.cestech.com.cn/file/30f7bb9d66624f7ebf87be3d2f69b07a.xlsx";
-  // "http://cdn.cestech.com.cn/file/2c26e7c5995e4ed7bb78f6a1747732ee.xlsx";
+    "https://oms.cestech.com.cn/file/27c21c6297c4448787bf4fff53f54205.xlsx";
+  // "http://cdn.cestech.com.cn/file/3648e276b25b412a824540e3682fb9b1.xlsx";
   formData.append("fileUrl", fileUrl);
   downloadFile(formData).then((res) => {
     const blob = new Blob([res.data], {

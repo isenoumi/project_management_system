@@ -21,14 +21,14 @@
         预计成交时间：{{ formInfo.estimatedClosingTime }}
       </div>
     </div>
-    <div class="boxTitle">招投标信息</div>
+    <!-- <div class="boxTitle">招投标信息</div>
     <div class="infoBox" v-if="formInfo.biddingStatus == '未中标'">
       <div class="title">未中标原因：{{ formInfo.result }}</div>
       <div class="title">
         <div class="title">上传附件:&nbsp;&nbsp;</div>
-        <!-- <el-button v-if="formInfo.annex" type="primary" text @click="download">
+        <el-button v-if="formInfo.annex" type="primary" text @click="download">
           下载
-        </el-button> -->
+        </el-button>
         <div v-if="annexList.length > 0" class="fileList">
           <div v-for="(item, index) in annexList" :key="index" class="item">
             <div @click="clickDownloadFile(item.url)">{{ item.fileName }}</div>
@@ -38,13 +38,13 @@
       </div>
     </div>
     <div class="infoBox" v-else>
-      <!-- <div class="title">项目类型：{{ formInfo.projectType }}</div> -->
+      <div class="title">项目类型：{{ formInfo.projectType }}</div>
       <div class="title">项目资金来源：{{ formInfo.projectSourceFunds }}</div>
       <div class="title" style="width: 300px">
         所属区域：{{ formInfo.area }}
       </div>
       <div class="title">客户名称：{{ formInfo.customerName }}</div>
-      <!-- <div class="title">客户联系人：{{ formInfo.customerContacts }}</div> -->
+      <div class="title">客户联系人：{{ formInfo.customerContacts }}</div>
       <div class="title">合同金额（万）：{{ formInfo.contractAmount }}</div>
       <div class="title" style="width: 300px">
         合同签订时间：{{ formInfo.contractTime }}
@@ -57,9 +57,9 @@
 
       <div class="title">
         <span class="title">上传附件:&nbsp;&nbsp;</span>
-        <!-- <el-button v-if="formInfo.annex" type="primary" text @click="download">
+        <el-button v-if="formInfo.annex" type="primary" text @click="download">
           下载
-        </el-button> -->
+        </el-button>
         <div v-if="annexList.length > 0" class="fileList">
           <div v-for="(item, index) in annexList" :key="index" class="item">
             <div @click="clickDownloadFile(item.url)">{{ item.fileName }}</div>
@@ -67,7 +67,7 @@
         </div>
         <span v-else>暂无附件</span>
       </div>
-    </div>
+    </div> -->
 
     <div class="boxTitle">操作记录</div>
     <operationRecordsTable

@@ -88,8 +88,9 @@
                 <el-table-column align="center" label="操作" width="100">
                   <template #default="scope">
                     <div style="display: flex; justify-content: space-around">
+                      <!-- TODO 进度反馈 -->
+                      <!--  v-hasPerm="['PROJECT_PLAN PROGRESS_FEEDBACK']" -->
                       <el-button
-                        v-hasPerm="['PROJECT_PLAN PROGRESS_FEEDBACK']"
                         text
                         type="primary"
                         @click="handleViewSubTable(scope.row)"

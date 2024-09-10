@@ -25,7 +25,8 @@
       <el-table-column prop="getMonth" label="所属月份" />
       <el-table-column prop="applicationNotes" label="付款事由" />
       <el-table-column prop="examineTime" label="审批时间" />
-      <el-table-column prop="examineBudget" label="审批预算" />
+      <!-- TODO 审批预算 -->
+      <!-- <el-table-column prop="examineBudget" label="审批预算" /> -->
       <el-table-column prop="examineRemark" label="审批备注" />
       <el-table-column prop="examineStatus" label="审核状态" />
       <el-table-column label="操作">

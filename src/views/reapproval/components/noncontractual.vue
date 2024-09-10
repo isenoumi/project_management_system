@@ -914,7 +914,7 @@ const threeChange = (e: any, index: any) => {
     if (res.code === 200) {
       if (res.data.overExpenditure === 0) {
         res.data.overExpenditure = "未超过";
-      } else {
+      } else if (res.data.overExpenditure === 1) {
         res.data.overExpenditure = "超过";
       }
       let list = [];
@@ -1006,7 +1006,7 @@ onMounted(() => {
         if (tableres.code === 200) {
           if (tableres.data.overExpenditure === 0) {
             tableres.data.overExpenditure = "未超过";
-          } else {
+          } else if (tableres.data.overExpenditure === 1) {
             tableres.data.overExpenditure = "超过";
           }
           let list = [];

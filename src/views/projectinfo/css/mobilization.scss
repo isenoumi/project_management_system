@@ -1,0 +1,63 @@
+.input {
+	width: 212px;
+}
+
+.addBtn {
+	margin-bottom: 20px;
+}
+
+.head {
+	display: flex;
+	align-items: center;
+}
+
+.head-input {
+	width: 400px;
+	display: flex;
+	align-items: center;
+}
+
+.btn {
+	margin-left: 40px;
+}
+
+.main {
+	margin-top: 30px;
+}
+
+.block {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 30px;
+}
+
+.formItem {
+	width: 400px;
+	display: flex;
+	justify-content: space-between;
+}
+
+/* .formItem >>> .el-form-item__content {
+            width: 250px;
+          } */
+
+.content {
+	display: flex;
+	justify-content: space-between;
+
+	.timelineBox {
+		display: flex;
+		justify-content: space-around;
+		width: 300px;
+
+		.timelineTitle {
+			display: flex;
+			justify-content: space-around;
+			font-size: 14px;
+			font-weight: 700;
+			margin-left: 30px;
+			display: inline-block;
+		}
+	}
+}

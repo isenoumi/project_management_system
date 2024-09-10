@@ -164,6 +164,18 @@
         :sub-id="id"
       ></task>
     </el-card>
+
+    <div v-if="projectApprovalVisible">
+      <projectApproval
+        v-model="projectApprovalVisible"
+        @reset="reset"
+        @queryList="queryList"
+        :id="id"
+        :noticeId="noticeId"
+        :noticeType="noticeType"
+        :formData="lixiangForm"
+      ></projectApproval>
+    </div>
   </div>
 </template>
 <!-- 图标选择器示例 -->
@@ -179,6 +191,7 @@ import task from "./components/task.vue";
 import budgetVue from "./components/budget.vue";
 import { downloadFile } from "@/api/plan/feishu";
 import getFileType from "@/utils/getFileType";
+import projectApproval from "./components/projectApproval.vue";
 // 路由对象
 const router = useRouter();
 // 当前页码
@@ -194,14 +207,18 @@ const budgetId = ref("");
 const refresh = ref(false);
 // 计划id
 const planId = ref("");
+const noticeId = ref("");
 // 查看通知弹框
 const noticeVisible = ref(false);
+const projectApprovalVisible = ref(false);
 // 查看计划任务弹框
 const taskVisible = ref(false);
 // 查看预算弹框
 const budgetVisible = ref(false);
+const noticeType = ref("");
 // 消息通知form
 const noticeForm = ref({});
+const lixiangForm = ref({});
 // select下拉
 const options = ref({ taskNoticeStatusOptions: {} });
 // 条件查询
@@ -221,6 +238,9 @@ const indexMethod = (index: number) => {
 
 // 查看通知详情
 const handleViewNotice = (index: number, row: any) => {
+  noticeType.value = row.noticeType;
+  noticeId.value = row.id;
+  setReadStatus({ id: row.id });
   if (row.noticeType == "PRE_SALES_SUPPORT") {
     router.push({
       path: "/presales/Presales",
@@ -232,7 +252,7 @@ const handleViewNotice = (index: number, row: any) => {
     getTaskNoticeOne({ id: row.noticeId }).then(({ data }) => {
       if (data) noticeForm.value = data;
     });
-    setReadStatus({ id: row.noticeId });
+    // setReadStatus({ id: row.noticeId });
   } else if (row.noticeType == "PROJECTPLAN") {
     id.value = row.projectPlanId;
     taskVisible.value = true;
@@ -248,6 +268,16 @@ const handleViewNotice = (index: number, row: any) => {
       path: "/dashboard",
       query: { noticeId: row.id },
     });
+  } else if (row.noticeType == "THE_PROJECT_WAS_APPROVED") {
+    id.value = row.projectId;
+    projectApprovalVisible.value = true;
+  } else if (row.noticeType == "PROJECT_RESULTS") {
+    id.value = row.projectId;
+    projectApprovalVisible.value = true;
+    lixiangForm.value = {
+      approvalIsStatus: row.approvalIsStatus,
+      rejectReason: row.rejectReason,
+    };
   }
 };
 //再次提交
@@ -311,6 +341,7 @@ const reset = () => {
     noticeType: "",
     updateTime: "",
   };
+  projectApprovalVisible.value = false;
   noticeVisible.value = false;
   queryList();
 };

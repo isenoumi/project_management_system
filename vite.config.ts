@@ -63,9 +63,9 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
           // target: "http://192.168.100.202:9999", // 线上接口地址
           // target: "http://192.168.100.203:30003", // 线上接口地址
           //  target: "http://192.168.100.25:9003", // 王杰本地地址
-          target: "http://124.220.27.136:9013", // 新建线上正式环境
+          // target: "http://124.220.27.136:9013", // 新建线上正式环境
           // target: "http://192.168.100.64:9003", // 陈子琪本地地址
-          // target: "http://192.168.100.63:9003", // 雍正宇本地地址
+          target: "http://192.168.100.70:9003", // 雍正宇本地地址
           // target: "http://192.168.100.16:9003", // 蒋俊本地地址
           // target: "https://25g3s95297.imdo.co", // 本地地址
           // target: 'http://localhost:8989',  // 本地接口地址 , 后端工程仓库地址：https://gitee.com/youlaiorg/youlai-boot
@@ -78,9 +78,9 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
           // target: "http://192.168.100.202:9999", // 线上接口地址
           // target: "http://192.168.100.203:30003", // 线上接口地址
           //  target: "http://192.168.100.25:9003", // 王杰本地地址
-          target: "http://124.220.27.136:9013", // 新建线上正式环境
+          // target: "http://124.220.27.136:9013", // 新建线上正式环境
           // target: "http://192.168.100.64:9002", // 陈子琪本地地址
-          // target: "http://192.168.100.63:9002", // 雍正宇本地地址
+          target: "http://192.168.100.70:9002", // 雍正宇本地地址
           // target: "http://192.168.100.16:9003", // 蒋俊本地地址
           // target: "https://25g3s95297.imdo.co", // 本地地址
           // target: 'http://localhost:8989',  // 本地接口地址 , 后端工程仓库地址：https://gitee.com/youlaiorg/youlai-boot

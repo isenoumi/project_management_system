@@ -115,7 +115,9 @@
           v-model="form.prepareContractAmount"
           class="input"
           required="required"
-          :min="1"
+          :min="0.1"
+          :precision="2"
+          :step="0.1"
         />
       </el-form-item>
       <el-form-item label="销售人员: " prop="salesperson">

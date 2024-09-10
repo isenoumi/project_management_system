@@ -15,7 +15,9 @@
     :headers="headers"
     :on-progress="updateFile"
   >
-    <el-button  text type="primary" v-loading.fullscreen.lock="uploading">{{ props.label }}</el-button>
+    <el-button text type="primary" v-loading.fullscreen.lock="uploading">{{
+      props.label
+    }}</el-button>
     <!-- <template #tip>
                 <div class="el-upload__tip">
                   jpg/png files with a size less than 500KB.
@@ -27,7 +29,7 @@
 <script setup lang="ts">
 import type { UploadProps, UploadUserFile } from "element-plus";
 const emits = defineEmits(["getFileUrl"]);
-const uploading=ref(false)
+const uploading = ref(false);
 const props = defineProps({
   label: { type: String, default: "上传附件" },
   planId: { type: String, default: "" },
@@ -54,16 +56,16 @@ if (props.planId && props.projectId) {
   };
 }
 const fileList = ref<UploadUserFile[]>([]);
-const updateFile=()=>{
-  uploading.value=true
-}
+const updateFile = () => {
+  uploading.value = true;
+};
 const handleRemove: UploadProps["onRemove"] = (file, uploadFiles) => {
   console.log(file, uploadFiles);
 };
 const handleSuccess: UploadProps["onSuccess"] = (res, uploadFile) => {
   console.log(res, uploadFile);
-  uploading.value=false
-  ElMessage.success("上传成功");
+  uploading.value = false;
+  // ElMessage.success("上传成功");
   emits("getFileUrl", res);
 };
 

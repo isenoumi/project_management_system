@@ -148,7 +148,19 @@ export function projectEstablishment(data: any) {
  */
 export function bidding(data: any) {
     return request({
-        url: `/oms-project/api/project/tender`,
+        url: `/oms-project/api/project/newtender`,
+        method: 'post',
+        data
+    });
+}
+/**
+ * 合同签订
+ *
+ * @param data
+ */
+export function contractSign(data: any) {
+    return request({
+        url: `/oms-project/api/project/creatProjectContrct`,
         method: 'get',
         params: data
     });

@@ -89,7 +89,17 @@
       </el-table-column>
       <el-table-column prop="projectBudgetIncome" label="项目收入" />
       <el-table-column prop="projectBudgetPay" label="项目预算支出" />
-      <el-table-column prop="projectBudgetGrossprofit" label="项目预毛利" />
+      <el-table-column prop="projectBudgetGrossprofit" label="项目预毛利">
+        <template #default="scope">
+          <div>
+            {{
+              scope.row.projectBudgetGrossprofit
+                ? (scope.row.projectBudgetGrossprofit * 100).toFixed(2) + "%"
+                : ""
+            }}
+          </div>
+        </template>
+      </el-table-column>
       <el-table-column prop="paymentFeesAmount" label="付款费用合计" />
       <el-table-column prop="executiveProjectLeader" label="项目执行经理">
         <template #default="scope">
@@ -279,10 +289,11 @@ const indexMethod: any = (index: number) => {
   return index * 1 + 1;
 };
 //导入预算
-const getFileUrl = (value: string) => {
+const getFileUrl = (value: any) => {
+  console.log("sada", value);
   ElMessage({
-    type: "success",
-    message: "导入成功",
+    type: value.code == 500 ? "error" : "success",
+    message: value.msg,
   });
   emit("getProjectPage");
   fileUrl.value = value;
@@ -317,6 +328,7 @@ const gopayment = (row: any) => {
 };
 //表格折叠事件
 const handleRowClick = (row: any, expandedRows: any) => {
+  console.log(row, expandedRows);
   let expands = ref<any>([]);
   if (expandedRows.length > 1) {
     expands.value = [];
@@ -331,19 +343,20 @@ const handleRowClick = (row: any, expandedRows: any) => {
   }
   tabletade.tabletade = [];
   const id = row.id;
-  getbyparentid(id)
-    .then(({ data }) => {
-      let list = data;
-      list.map((v: any) => {
-        if (v.overExpenditure == "0") {
-          v.overExpenditure = "未超过";
-        } else {
-          v.overExpenditure = "超过";
-        }
-      });
-      tabletade.tabletade = data;
-    })
-    .finally(() => {});
+  if (expandedRows.filter((item) => item.id === row.id)?.length > 0)
+    getbyparentid(id)
+      .then(({ data }) => {
+        let list = data;
+        list.map((v: any) => {
+          if (v.overExpenditure == "0") {
+            v.overExpenditure = "未超过";
+          } else if (v.overExpenditure == "1") {
+            v.overExpenditure = "超过";
+          }
+        });
+        tabletade.tabletade = data;
+      })
+      .finally(() => {});
 };
 //点击表格
 const handledetail11 = (row: any, column: any, event: any) => {
@@ -360,3 +373,4 @@ onMounted(() => {
 <style scoped lang="scss">
 @import "../css/index.scss";
 </style>
+import { filter } from "lodash";

@@ -230,10 +230,11 @@ import {
   gettApprovaInstance,
 } from "@/api/budget";
 import { useRoute } from "vue-router";
+// 备用金科目
 const subjectIdList = {
-  oneSubjectId: "1740541694159405057",
-  twoSubjectId: "1740541694381703170",
-  threeSubjectId: "1740541694822105090",
+  oneSubjectId: "1771000681449152516",
+  twoSubjectId: "1771000681449152519",
+  threeSubjectId: "1771000681512067078",
 };
 const route = useRoute();
 const loading = ref(false);
@@ -792,7 +793,7 @@ const threeChange = (e: any, index: any) => {
     if (res.code === 200) {
       if (res.data.overExpenditure === 0) {
         res.data.overExpenditure = "未超过";
-      } else {
+      } else if (res.data.overExpenditure === 1) {
         res.data.overExpenditure = "超过";
       }
       let list = [];

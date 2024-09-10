@@ -205,9 +205,7 @@
           :on-exceed="handleExceed"
           :show-file-list="true"
         >
-          <el-button @click="btnupload(index)" type="primary"
-            >上传附件</el-button
-          >
+          <el-button type="text" @click="btnupload(index)">上传附件</el-button>
         </el-upload>
       </div>
       <div class="add-carefuls">
@@ -642,9 +640,117 @@ const paymentcontractSubmin = () => {
             value: [v.fileCode],
           },
         ];
-        formData.append("params", JSON.stringify(contractPaymentList));
+        const contractPaymentListTest = [
+          // 正式环境
+          //一级科目
+          {
+            id: "widget16966645333720001",
+            type: "input",
+            value: v.oneLevel + "",
+          },
+          //二级科目
+          {
+            id: "widget16966646053290001",
+            type: "input",
+            value: v.secondary + "",
+          },
+          //三级科目
+          {
+            id: "widget16966646111610001",
+            type: "input",
+            value: v.threeLevel + "",
+          },
+          //科目编号
+          {
+            id: "widget16966646186920001",
+            type: "input",
+            value: v.datalist[0].code + "",
+          },
+          //是否超标
+          {
+            id: "widget16967486122830001",
+            type: "input",
+            value: v.datalist[0].overExpenditure + "",
+          },
+          //预算费用合计
+          {
+            id: "widget16966646381500001",
+            type: "amount",
+            currency: "CNY",
+            value: Number(v.datalist[0].costAmount),
+          },
+          //付款费用合计
+          {
+            id: "widget16966646780140001",
+            type: "amount",
+            currency: "CNY",
+            value: Number(v.datalist[0].payAmount),
+          },
+          //付款金额
+          {
+            id: "widget16967330962780001",
+            type: "amount",
+            currency: "CNY",
+            value: Number(v.payAmount),
+          },
+          //所属月份
+          {
+            id: "widget16967310860240001",
+            type: "input",
+            value: v.getMonth + "",
+          },
+          //付款方式
+          {
+            id: "widget16967314831190001",
+            type: "input",
+            value: v.paymentPlatform + "",
+          },
+          //付款日期
+          {
+            id: "widget16967323059110001",
+            type: "input",
+            value: v.paymentDate + "",
+          },
+          //收款人（单位）全称
+          {
+            id: "widget16966649115750001",
+            type: "input",
+            value: v.payeeUnit,
+          },
+          //开户银行
+          {
+            id: "widget16966649315540001",
+            type: "input",
+            value: v.openAccountBank,
+          },
+          //银行账户
+          {
+            id: "widget16966649429250001",
+            type: "input",
+            value: v.bankAccount,
+          },
+          //付款事由
+          {
+            id: "widget16966649623880001",
+            type: "textarea",
+            value: v.paymentRemarks + "",
+          },
+          //附件
+          {
+            id: "widget16510493307470001",
+            type: "attachmentV2",
+            value: [v.fileCode],
+          },
+        ];
+        // TODO 非合同付款审批
         // 正式环境
-        formData.append("approvalCode", "99C80AEA-A4A2-44D7-BF37-BF582736ACBA");
+        // formData.append("params", JSON.stringify(contractPaymentList));
+        // formData.append("approvalCode", "99C80AEA-A4A2-44D7-BF37-BF582736ACBA");
+
+        // 测试环境
+        formData.append("params", JSON.stringify(contractPaymentListTest));
+        formData.append("approvalCode", "DF131AA0-467E-43F6-8AEE-952D04BFC590");
+
         formData.append("feishuUserId", user.feishuUserId);
         // 提交审批创建飞书实例
         getfeishuCreatesAnApproval(formData).then((res: any) => {
@@ -991,7 +1097,7 @@ const threeChange = (e: any, index: any) => {
     if (res.code === 200) {
       if (res.data.overExpenditure === 0) {
         res.data.overExpenditure = "未超过";
-      } else {
+      } else if (res.data.overExpenditure === 1) {
         res.data.overExpenditure = "超过";
       }
       let list = [];

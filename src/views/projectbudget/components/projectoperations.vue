@@ -25,7 +25,9 @@
       <el-table-column prop="name" label="预算科目类别" width="120" />
       <el-table-column prop="costAmount" label="预算费用合计" width="120" />
       <el-table-column prop="payAmount" label="付款费用合计" width="120" />
-      <el-table-column prop="overExpenditure" label="是否超预算" width="120" />
+      <el-table-column prop="overExpenditure" label="是否超预算" width="120">
+        <!-- <template #default="{ row }">{{ row }}</template> -->
+      </el-table-column>
       <el-table-column prop="januaryCost" label="1月" />
       <el-table-column prop="februaryCost" label="2月" />
       <el-table-column prop="marchCost" label="3月" />

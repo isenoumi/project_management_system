@@ -220,6 +220,7 @@ const uploadData = ref({
 });
 //所属合同输入
 const renyuanChange = (e: any) => {
+  console.log("object", e);
   query.showinput = false;
   cityname.value = "";
   let data = {
@@ -531,12 +532,82 @@ const paymentcontractSubmin = () => {
           //     value: [query.fileCode],
           // },
         ];
+        //合同付款审批测试
+        let contractPaymentListTest = [
+          //所属合同
+          {
+            id: "widget16967537786820001",
+            type: "input",
+            value: contractx + "",
+          },
+          //付款方式
+          {
+            id: "widget16967538245300001",
+            type: "input",
+            value: way + "",
+          },
+          //付款日期
+          {
+            id: "widget16967538484230001",
+            type: "input",
+            value: query.paymentDate + "",
+          },
+          // //科目编号
+          {
+            id: "widget16967538861220001",
+            type: "input",
+            value: v.subjectCode + "",
+          },
+          //付款金额
+          {
+            id: "widget16510492513760001",
+            type: "amount",
+            currency: "CNY",
+            value: Number(v.payments),
+          },
+          //预算费用合计
+          {
+            id: "widget16967539183990001",
+            type: "amount",
+            currency: "CNY",
+            value: Number(v.costAmount),
+          },
+          //合同金额
+          {
+            id: "widget16967539509670001",
+            type: "amount",
+            currency: "CNY",
+            value: Number(v.contractAmount),
+          },
+          //剩余合同金额
+          {
+            id: "widget16967539589550001",
+            type: "amount",
+            currency: "CNY",
+            value: Number(v.ableContractAmount),
+          },
+          //付款事由
+          {
+            id: "widget16510492382000001",
+            type: "textarea",
+            value: query.paymentRemarks,
+          },
+          //附件
+          {
+            id: "widget16510493307470001",
+            type: "attachmentV2",
+            value: [query.fileCode],
+          },
+        ];
         const formData = new FormData();
-        formData.append("params", JSON.stringify(contractPaymentList));
-        //测试环境
-        // formData.append("approvalCode", "EAE47F26-3490-4417-A77E-1108A65F84AF");
-        //正式环境
-        formData.append("approvalCode", "0C9044BF-E632-42E6-AB19-E239457AC946");
+        // TODO 再次提交合同付款审批
+        // 正式
+        // formData.append("params", JSON.stringify(contractPaymentList));
+        // formData.append("approvalCode", "0C9044BF-E632-42E6-AB19-E239457AC946");
+
+        // 测试
+        formData.append("params", JSON.stringify(contractPaymentListTest));
+        formData.append("approvalCode", "EAE47F26-3490-4417-A77E-1108A65F84AF");
         formData.append("feishuUserId", user.feishuUserId);
         // 提交审批创建飞书实例
         getfeishuCreatesAnApproval(formData).then((res: any) => {
@@ -680,23 +751,25 @@ onMounted(() => {
     let contractId = {
       contractId: res.data.contractId,
     };
-    getlistSubjectByContractId(contractId).then((conres: any) => {
-      query.tableData = [];
-      conres.data.map((v: any) => {
-        console.log(v, "xxx");
-        if (v.subjectId === res.data.budgetSubjectId) {
-          query.tableData.push(v);
-          showList.value = true;
-          nameList.value = [];
-          let obj = {
-            payment: res.data.payAmount.toFixed(2),
-            name: v.subjectName,
-            budgetSubjectId: v.subjectId,
-          };
-          nameList.value.push(obj);
-        }
+    // TODO contractId == null error
+    console.log("contractId", contractId);
+    if (res.data.contractId)
+      getlistSubjectByContractId(contractId).then((conres: any) => {
+        query.tableData = [];
+        conres.data.map((v: any) => {
+          if (v.subjectId === res.data.budgetSubjectId) {
+            query.tableData.push(v);
+            showList.value = true;
+            nameList.value = [];
+            let obj = {
+              payment: res.data.payAmount.toFixed(2),
+              name: v.subjectName,
+              budgetSubjectId: v.subjectId,
+            };
+            nameList.value.push(obj);
+          }
+        });
       });
-    });
   });
 });
 </script>
